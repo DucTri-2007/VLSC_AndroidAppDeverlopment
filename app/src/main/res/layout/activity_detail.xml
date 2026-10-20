@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <!-- Avatar sinh viên -->
+    <ImageView
+        android:id="@+id/imgDetailAvatar"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/detail_title"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Họ và tên (đúng id tvDetailName theo đặc tả đề bài) -->
+    <TextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgDetailAvatar"
+        tools:text="Nguyễn Văn An" />
+
+    <!-- MSSV (đúng id tvDetailMssv theo đặc tả đề bài) -->
+    <TextView
+        android:id="@+id/tvDetailMssv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailName"
+        tools:text="MSSV: 2024001" />
+
+    <!-- Nút Chia sẻ hồ sơ (Implicit Intent ACTION_SEND theo Mục 3 đề bài) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnShare"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/btn_share"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:icon="@android:drawable/ic_menu_share"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailMssv" />
+
+    <!-- Nút Quay lại màn hình danh sách -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/btn_back"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnShare" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

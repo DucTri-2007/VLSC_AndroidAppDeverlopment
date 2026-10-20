@@ -1,12 +1,12 @@
 package vn.edu.vlsc.lab03a_vunguyenductri_2500115657
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.content.Intent
 import vn.edu.vlsc.lab03a_vunguyenductri_2500115657.adapter.StudentAdapter
 import vn.edu.vlsc.lab03a_vunguyenductri_2500115657.databinding.ActivityMainBinding
 import vn.edu.vlsc.lab03a_vunguyenductri_2500115657.model.Student
@@ -14,7 +14,21 @@ import vn.edu.vlsc.lab03a_vunguyenductri_2500115657.model.Student
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val studentAdapter = StudentAdapter { student -> showStudentToast(student) }
+
+    // Bước 3: Định tuyến Intent tại Adapter/MainActivity (Time complexity O(1), Phức tạp không gian: O(M))
+    private val studentAdapter = StudentAdapter { student ->
+        val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+            // Ghi dữ liệu vào Bundle qua cơ chế Parcelable
+            putExtra(DetailActivity.EXTRA_STUDENT, student)
+
+            /**
+             * [HUẤN LUYỆN GỠ LỖI - LỖI 1: TRÀN BỘ ĐỆM BINDER (OOM / TransactionTooLargeException)]
+             * Mở comment dòng dưới đây để quan sát crash TransactionTooLargeException khi vượt ngưỡng ~1MB:
+             * putExtra("CRASH", ByteArray(1024 * 1024 + 512 * 1024))
+             */
+        }
+        startActivity(intent) // Kích hoạt luồng IPC Binder
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,14 +57,6 @@ class MainActivity : AppCompatActivity() {
             adapter = studentAdapter
             setHasFixedSize(true)
         }
-    }
-
-    private fun showStudentToast(student: Student) {
-        Toast.makeText(
-            this,
-            getString(R.string.student_selected, student.name, student.mssv),
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     private fun getSampleStudents(): List<Student> {
